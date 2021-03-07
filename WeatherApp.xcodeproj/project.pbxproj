@@ -16,6 +16,7 @@
 		EFED4FAD25F4FC1F003AE2E7 /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FAC25F4FC1E003AE2E7 /* WeatherForecast.swift */; };
 		EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB025F4FFE9003AE2E7 /* Location.swift */; };
 		EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */; };
+		EFED4FBF25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 		EFED4FAC25F4FC1E003AE2E7 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
 		EFED4FB025F4FFE9003AE2E7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLoader.swift; sourceTree = "<group>"; };
+		EFED4FBD25F50346003AE2E7 /* WeatherAppTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherAppTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				EFED4F9025F2E2ED003AE2E7 /* Info.plist */,
+				EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */,
+				EFED4FBD25F50346003AE2E7 /* WeatherAppTests-Bridging-Header.h */,
 			);
 			path = WeatherAppTests;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 					};
 					EFED4F8825F2E2ED003AE2E7 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -235,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFED4FBF25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = G8H6DP9BPD;
@@ -436,6 +444,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = MT.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeatherAppTests/WeatherAppTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -444,6 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = G8H6DP9BPD;
@@ -455,6 +466,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = MT.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeatherAppTests/WeatherAppTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
