@@ -8,5 +8,6 @@
 import Foundation
 
 struct WeatherForecast {
+    let currentWeather: CurrentWeather
     let days: [DailyWeatherForecast]
 }
