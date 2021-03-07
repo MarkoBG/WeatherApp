@@ -50,7 +50,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (client, sut) = makeSUT()
         
-        let samples = [199, 201, 300, 400, 401, 500]
+        let samples = [199, 201, 300, 400, 401, 403, 500]
         
         samples.enumerated().forEach { index, code in
             var capturedErrors = [RemoteWeatherLoader.Error]()
@@ -60,7 +60,18 @@ class RemoteWeatherLoaderTests: XCTestCase {
             
             XCTAssertEqual(capturedErrors, [.invalidData])
         }
+    }
+    
+    func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+        let (client, sut) = makeSUT()
         
+        var capturedErrors = [RemoteWeatherLoader.Error]()
+        sut.load { capturedErrors.append($0) }
+        
+        let invalidJSON = Data.init("invalid json".utf8)
+        client.complete(withStatusCode: 400, data: invalidJSON)
+        
+        XCTAssertEqual(capturedErrors, [.invalidData])
     }
     
     // MARK: - Helpers
@@ -81,10 +92,10 @@ class RemoteWeatherLoaderTests: XCTestCase {
             messages[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: code, httpVersion: nil, headerFields: nil)!
             
-            messages[index].completion(.success(response))
+            messages[index].completion(.success(data, response))
         }
     }
     
