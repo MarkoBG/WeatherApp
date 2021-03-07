@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EFED4F8A25F2E2ED003AE2E7 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
-		EFED4F8F25F2E2ED003AE2E7 /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F8E25F2E2ED003AE2E7 /* WeatherAppTests.swift */; };
 		EFED4F9125F2E2ED003AE2E7 /* WeatherApp.h in Headers */ = {isa = PBXBuildFile; fileRef = EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */; };
 		EFED4FA125F4F9C0003AE2E7 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FA025F4F9C0003AE2E7 /* WeatherCondition.swift */; };
@@ -34,7 +33,6 @@
 		EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherApp.h; sourceTree = "<group>"; };
 		EFED4F8425F2E2EC003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFED4F8925F2E2ED003AE2E7 /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFED4F8E25F2E2ED003AE2E7 /* WeatherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppTests.swift; sourceTree = "<group>"; };
 		EFED4F9025F2E2ED003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		EFED4FA025F4F9C0003AE2E7 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		EFED4F8D25F2E2ED003AE2E7 /* WeatherAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				EFED4F8E25F2E2ED003AE2E7 /* WeatherAppTests.swift */,
 				EFED4F9025F2E2ED003AE2E7 /* Info.plist */,
 			);
 			path = WeatherAppTests;
@@ -238,7 +235,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFED4F8F25F2E2ED003AE2E7 /* WeatherAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
