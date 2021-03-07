@@ -10,6 +10,7 @@
 		EFED4F8A25F2E2ED003AE2E7 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
 		EFED4F8F25F2E2ED003AE2E7 /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F8E25F2E2ED003AE2E7 /* WeatherAppTests.swift */; };
 		EFED4F9125F2E2ED003AE2E7 /* WeatherApp.h in Headers */ = {isa = PBXBuildFile; fileRef = EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		EFED4F8925F2E2ED003AE2E7 /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFED4F8E25F2E2ED003AE2E7 /* WeatherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppTests.swift; sourceTree = "<group>"; };
 		EFED4F9025F2E2ED003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */,
 				EFED4F8425F2E2EC003AE2E7 /* Info.plist */,
+				EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				TargetAttributes = {
 					EFED4F7F25F2E2EC003AE2E7 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 					EFED4F8825F2E2ED003AE2E7 = {
 						CreatedOnToolsVersion = 12.2;
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +345,7 @@
 		EFED4F9525F2E2ED003AE2E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -357,6 +363,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = MT.WeatherApp;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -364,6 +371,7 @@
 		EFED4F9625F2E2ED003AE2E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -388,6 +396,7 @@
 		EFED4F9825F2E2ED003AE2E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = G8H6DP9BPD;
@@ -406,6 +415,7 @@
 		EFED4F9925F2E2ED003AE2E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = G8H6DP9BPD;
