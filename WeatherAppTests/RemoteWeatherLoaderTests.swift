@@ -38,13 +38,10 @@ class RemoteWeatherLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (client, sut) = makeSUT()
         
-        var capturedErrors = [RemoteWeatherLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let clientError = NSError(domain: "Test", code: 0, userInfo: nil)
-        client.complete(with: clientError)
-        
-        XCTAssertEqual(capturedErrors, [.connectivity])
+        expect(sut, toCompleteWithError: .connectivity) {
+            let clientError = NSError(domain: "Test", code: 0, userInfo: nil)
+            client.complete(with: clientError)
+        }
     }
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
@@ -53,25 +50,20 @@ class RemoteWeatherLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 401, 403, 500]
         
         samples.enumerated().forEach { index, code in
-            var capturedErrors = [RemoteWeatherLoader.Error]()
-            sut.load { capturedErrors.append($0) }
             
-            client.complete(withStatusCode: 400, at: index)
-            
-            XCTAssertEqual(capturedErrors, [.invalidData])
+            expect(sut, toCompleteWithError: .invalidData) {
+                client.complete(withStatusCode: 400, at: index)
+            }
         }
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (client, sut) = makeSUT()
         
-        var capturedErrors = [RemoteWeatherLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let invalidJSON = Data.init("invalid json".utf8)
-        client.complete(withStatusCode: 400, data: invalidJSON)
-        
-        XCTAssertEqual(capturedErrors, [.invalidData])
+        expect(sut, toCompleteWithError: .invalidData) {
+            let invalidJSON = Data.init("invalid json".utf8)
+            client.complete(withStatusCode: 400, data: invalidJSON)
+        }
     }
     
     // MARK: - Helpers
@@ -103,6 +95,16 @@ class RemoteWeatherLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteWeatherLoader(url: url, client: client)
         return (client, sut)
+    }
+    
+    private func expect(_ sut: RemoteWeatherLoader, toCompleteWithError error: RemoteWeatherLoader.Error, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        
+        var capturedErrors = [RemoteWeatherLoader.Error]()
+        sut.load { capturedErrors.append($0) }
+        
+        action()
+        
+        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
     }
     
 }
