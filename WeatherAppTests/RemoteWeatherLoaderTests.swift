@@ -9,14 +9,16 @@ import XCTest
 
 class RemoteWeatherLoader {
     
+    private let url: URL
     private let client: HTTPClient
     
-    init(client: HTTPClient) {
+    init(url: URL, client: HTTPClient) {
+        self.url = url
         self.client = client
     }
     
     func load() {
-        
+        client.get(from: url)
     }
 }
 
@@ -27,10 +29,21 @@ protocol HTTPClient {
 class RemoteWeatherLoaderTests: XCTestCase {
     
     func test_init_doesNotRequestDataFromURL() {
+        let url = URL(string: "https://any-url.com")!
         let client = HTTPClientSpy()
-        _ = RemoteWeatherLoader(client: client)
+        _ = RemoteWeatherLoader(url: url, client: client)
         
         XCTAssertNil(client.requestedURL)
+    }
+    
+    func test_load_requestDataFromURL() {
+        let url = URL(string: "https://any-url.com")!
+        let client = HTTPClientSpy()
+        let sut = RemoteWeatherLoader(url: url, client: client)
+        
+        sut.load()
+        
+        XCTAssertEqual(client.requestedURL, url)
     }
     
     // MARK: - Helpers
