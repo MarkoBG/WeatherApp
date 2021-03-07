@@ -8,6 +8,7 @@
 import Foundation
 
 struct WeatherForecast {
+    let location: Location
     let currentWeather: CurrentWeather
     let days: [DailyWeatherForecast]
 }
