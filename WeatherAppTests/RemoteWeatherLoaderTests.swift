@@ -25,14 +25,26 @@ class RemoteWeatherLoaderTests: XCTestCase {
         XCTAssertEqual(client.requestedURL, url)
     }
     
+    func test_loadTwice_requestsDataFromURLTwice() {
+        let url = URL(string: "https://a-given-url.com")!
+        let (client, sut) = makeSUT(url: url)
+        
+        sut.load()
+        sut.load()
+        
+        XCTAssertEqual(client.requestedURLs, [url, url])
+    }
+    
     // MARK: - Helpers
     
     private class HTTPClientSpy: HTTPClient {
         
         var requestedURL: URL?
+        var requestedURLs = [URL]()
         
         func get(from url: URL) {
             requestedURL = url
+            requestedURLs.append(url)
         }
     }
     
