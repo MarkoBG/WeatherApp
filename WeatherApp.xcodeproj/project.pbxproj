@@ -16,6 +16,7 @@
 		EFED4FA925F4FA54003AE2E7 /* DailyWeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FA825F4FA54003AE2E7 /* DailyWeatherForecast.swift */; };
 		EFED4FAD25F4FC1F003AE2E7 /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FAC25F4FC1E003AE2E7 /* WeatherForecast.swift */; };
 		EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB025F4FFE9003AE2E7 /* Location.swift */; };
+		EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		EFED4FA825F4FA54003AE2E7 /* DailyWeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherForecast.swift; sourceTree = "<group>"; };
 		EFED4FAC25F4FC1E003AE2E7 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
 		EFED4FB025F4FFE9003AE2E7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				EFED4FA825F4FA54003AE2E7 /* DailyWeatherForecast.swift */,
 				EFED4FAC25F4FC1E003AE2E7 /* WeatherForecast.swift */,
 				EFED4FB025F4FFE9003AE2E7 /* Location.swift */,
+				EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				EFED4FAD25F4FC1F003AE2E7 /* WeatherForecast.swift in Sources */,
 				EFED4FA525F4F9DC003AE2E7 /* AirQuality.swift in Sources */,
 				EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */,
+				EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */,
 				EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */,
 				EFED4FA925F4FA54003AE2E7 /* DailyWeatherForecast.swift in Sources */,
 			);
