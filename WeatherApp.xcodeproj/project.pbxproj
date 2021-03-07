@@ -17,6 +17,7 @@
 		EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB025F4FFE9003AE2E7 /* Location.swift */; };
 		EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */; };
 		EFED4FBF25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */; };
+		EFED4FC425F56BF0003AE2E7 /* RemoteWeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4FC325F56BF0003AE2E7 /* RemoteWeatherLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLoader.swift; sourceTree = "<group>"; };
 		EFED4FBD25F50346003AE2E7 /* WeatherAppTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherAppTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoaderTests.swift; sourceTree = "<group>"; };
+		EFED4FC325F56BF0003AE2E7 /* RemoteWeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		EFED4F8225F2E2EC003AE2E7 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				EFED4FC225F56BCE003AE2E7 /* Weather Forecast API */,
 				EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */,
 				EFED4F8425F2E2EC003AE2E7 /* Info.plist */,
 				EFED4FB825F50222003AE2E7 /* Weather Forecast Feature */,
@@ -115,6 +118,14 @@
 				EFED4FB425F50155003AE2E7 /* WeatherLoader.swift */,
 			);
 			path = "Weather Forecast Feature";
+			sourceTree = "<group>";
+		};
+		EFED4FC225F56BCE003AE2E7 /* Weather Forecast API */ = {
+			isa = PBXGroup;
+			children = (
+				EFED4FC325F56BF0003AE2E7 /* RemoteWeatherLoader.swift */,
+			);
+			path = "Weather Forecast API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 				EFED4FA525F4F9DC003AE2E7 /* AirQuality.swift in Sources */,
 				EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */,
 				EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */,
+				EFED4FC425F56BF0003AE2E7 /* RemoteWeatherLoader.swift in Sources */,
 				EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */,
 				EFED4FA925F4FA54003AE2E7 /* DailyWeatherForecast.swift in Sources */,
 			);
