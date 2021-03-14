@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct WeatherForecast {
+public struct WeatherForecast: Equatable {
     let location: Location
     let currentWeather: CurrentWeather
     let days: [DailyWeatherForecast]
+    
+    public static func == (lhs: WeatherForecast, rhs: WeatherForecast) -> Bool {
+        return lhs.location.localTime == rhs.location.localTime
+    }
 }
