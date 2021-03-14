@@ -38,7 +38,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (client, sut) = makeSUT()
         
-        expect(sut, toCompleteWithError: .connectivity) {
+        expect(sut, toCompleteWith: .failure(.connectivity)) {
             let clientError = NSError(domain: "Test", code: 0, userInfo: nil)
             client.complete(with: clientError)
         }
@@ -51,7 +51,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         
         samples.enumerated().forEach { index, code in
             
-            expect(sut, toCompleteWithError: .invalidData) {
+            expect(sut, toCompleteWith: .failure(.invalidData)) {
                 client.complete(withStatusCode: 400, at: index)
             }
         }
@@ -60,7 +60,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (client, sut) = makeSUT()
         
-        expect(sut, toCompleteWithError: .invalidData) {
+        expect(sut, toCompleteWith: .failure(.invalidData)) {
             let invalidJSON = Data.init("invalid json".utf8)
             client.complete(withStatusCode: 400, data: invalidJSON)
         }
@@ -97,14 +97,14 @@ class RemoteWeatherLoaderTests: XCTestCase {
         return (client, sut)
     }
     
-    private func expect(_ sut: RemoteWeatherLoader, toCompleteWithError error: RemoteWeatherLoader.Error, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: RemoteWeatherLoader, toCompleteWith result: RemoteWeatherLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         
         var capturedResults = [RemoteWeatherLoader.Result]()
         sut.load { capturedResults.append($0) }
         
         action()
         
-        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
 }
