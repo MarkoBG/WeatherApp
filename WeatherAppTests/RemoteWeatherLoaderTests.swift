@@ -52,7 +52,8 @@ class RemoteWeatherLoaderTests: XCTestCase {
         samples.enumerated().forEach { index, code in
             
             expect(sut, toCompleteWith: .failure(.invalidData)) {
-                client.complete(withStatusCode: 400, at: index)
+                let emptyJSONData = Data.init("{}".utf8)
+                client.complete(withStatusCode: 400, data: emptyJSONData, at: index)
             }
         }
     }
@@ -99,7 +100,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
             messages[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: code, httpVersion: nil, headerFields: nil)!
             
             messages[index].completion(.success(data, response))
