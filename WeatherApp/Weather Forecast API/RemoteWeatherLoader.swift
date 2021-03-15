@@ -39,8 +39,14 @@ public final class RemoteWeatherLoader {
     public func load(completion: @escaping (Result) -> Void) {
         client.get(from: url) { result in
             switch result {
-            case .success:
-                completion(.failure(.invalidData))
+            case let .success(data, response):
+                do {
+                    let weatherForecast = try WeatherForecastMapper.map(data, response)
+                    completion(.success(weatherForecast))
+                } catch {
+                    completion(.failure(.invalidData))
+                }
+                
             case .failure:
                 completion(.failure(.connectivity))
             }
@@ -48,3 +54,18 @@ public final class RemoteWeatherLoader {
     }
 }
 
+private class WeatherForecastMapper {
+    
+    private static var OK_200: Int {
+        return 200
+    }
+    
+    static func map(_ data: Data, _ response: HTTPURLResponse) throws -> WeatherForecast {
+        guard response.statusCode == OK_200 else {
+            throw RemoteWeatherLoader.Error.invalidData
+        }
+        
+        let weatherForecast = try JSONDecoder().decode(WeatherForecast.self, from: data)
+        return weatherForecast
+    }
+}
