@@ -23,16 +23,6 @@ public struct DailyWeatherForecast {
     }
 }
 
-extension DailyWeatherForecast: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case date
-        case dateUnixTime = "date_epoch"
-        case day
-        case astrology = "astro"
-        case hours = "hour"
-    }
-}
-
 public struct DailyWeather {
     public let maxTempCelsius: Float
     public let maxTempFahrenheit: Float
@@ -73,28 +63,6 @@ public struct DailyWeather {
     }
 }
 
-extension DailyWeather: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case maxTempCelsius = "maxtemp_c"
-        case maxTempFahrenheit = "maxtemp_f"
-        case minTempCelsius = "mintemp_c"
-        case minTempFahrenheit = "mintemp_f"
-        case avgTempCelsius = "avgtemp_c"
-        case avgTempFahrenheit = "avgtemp_f"
-        case maxWindMph = "maxwind_mph"
-        case maxWingKph = "maxwind_kph"
-        case totalprecipitationMM = "totalprecip_mm"
-        case totalprecipitationIN = "totalprecip_in"
-        case averageVisibilityKM = "avgvis_km"
-        case averageVisibilityMiles = "avgvis_miles"
-        case averageHumidity = "avghumidity"
-        case dailyChanceOfRain = "daily_chance_of_rain"
-        case dailyChanceOfSnow = "daily_chance_of_snow"
-        case condition
-        case uvIndex = "uv"
-    }
-}
-
 public struct Astrology {
     public let sunrise: String
     public let sunset: String
@@ -110,17 +78,6 @@ public struct Astrology {
         self.moonset = moonset
         self.moonPhase = moonPhase
         self.moonIllumination = moonIllumination
-    }
-}
-
-extension Astrology: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case sunrise
-        case sunset
-        case moonrise
-        case moonset
-        case moonPhase = "moon_phase"
-        case moonIllumination = "moon_illumination"
     }
 }
 
@@ -173,33 +130,5 @@ public struct WeatherByHour {
         self.uvIndex = uvIndex
         self.chanceOfRain = chanceOfRain
         self.chanceOfSnow = chanceOfSnow
-    }
-}
-
-extension WeatherByHour: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case time
-        case timeUnixTime = "date_epoch"
-        case tempCelsius = "temp_c"
-        case tempFahrenheit = "temp_f"
-        case isDay = "is_day"
-        case condition
-        case windMph = "wind_mph"
-        case windKph = "wind_kph"
-        case windDegree = "wind_degree"
-        case windDirection = "wind_dir"
-        case pressureMb = "pressure_mb"
-        case pressureIn = "pressure_in"
-        case precipitationMM = "precip_mm"
-        case precipitationIN = "precip_in"
-        case humidity
-        case cloud
-        case feelslikeCelsius = "feelslike_c"
-        case feeelslikeFahrenheit = "feelslike_f"
-        case visibilityKM = "vis_km"
-        case visibilityMiles = "vis_miles"
-        case uvIndex = "uv"
-        case chanceOfRain = "chance_of_rain"
-        case chanceOfSnow = "chance_of_snow"
     }
 }

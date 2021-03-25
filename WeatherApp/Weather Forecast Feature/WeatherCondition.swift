@@ -18,11 +18,3 @@ public struct WeatherCondition {
         self.code = code
     }
 }
-
-extension WeatherCondition: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case description = "text"
-        case iconURL = "icon"
-        case code
-    }
-}

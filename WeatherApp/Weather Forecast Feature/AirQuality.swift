@@ -31,15 +31,3 @@ public struct AirQuality {
     }
 }
 
-extension AirQuality: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case carbonMonoxide = "co"
-        case ozon = "o3"
-        case nitrogenDioxide = "no2"
-        case sulphurDioxide = "so2"
-        case pm2_5
-        case pm10
-        case usEpaIndex = "us-epa-index"
-        case gbDefraIndex = "gb-defra-index"
-    }
-}

@@ -26,15 +26,3 @@ public struct Location {
         self.localTime = localTime
     }
 }
-
-extension Location: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case name
-        case region
-        case country
-        case latitude = "lat"
-        case longitude = "lon"
-        case timeZoneId = "tz_id"
-        case localTime = "localtime"
-    }
-}

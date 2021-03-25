@@ -54,29 +54,3 @@ public struct CurrentWeather {
         self.airQuality = airQuality
     }
 }
-
-extension CurrentWeather: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case lastUpdated = "last_updated"
-        case tempCelsius = "temp_c"
-        case tempFahrenheit = "temp_f"
-        case isDay = "is_day"
-        case condition
-        case windMph = "wind_mph"
-        case windKph = "wind_kph"
-        case windDegree = "wind_degree"
-        case windDirection = "wind_dir"
-        case pressureMb = "pressure_mb"
-        case pressureIn = "pressure_in"
-        case precipitationMM = "precip_mm"
-        case precipitationIN = "precip_in"
-        case humidity
-        case cloud
-        case feelslikeCelsius = "feelslike_c"
-        case feelslikeFahrenheit = "feelslike_f"
-        case visibilityKM = "vis_km"
-        case visibilityMiles = "vis_miles"
-        case uvIndex = "uv"
-        case airQuality = "air_quality"
-    }
-}
