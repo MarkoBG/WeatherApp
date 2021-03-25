@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EFB0F849260D3FBC00172920 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F848260D3FBC00172920 /* HTTPClient.swift */; };
 		EFED4F8A25F2E2ED003AE2E7 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
 		EFED4F9125F2E2ED003AE2E7 /* WeatherApp.h in Headers */ = {isa = PBXBuildFile; fileRef = EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EFB0F848260D3FBC00172920 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherApp.h; sourceTree = "<group>"; };
 		EFED4F8425F2E2EC003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				EFED4FC325F56BF0003AE2E7 /* RemoteWeatherLoader.swift */,
+				EFB0F848260D3FBC00172920 /* HTTPClient.swift */,
 			);
 			path = "Weather Forecast API";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				EFED4FA525F4F9DC003AE2E7 /* AirQuality.swift in Sources */,
 				EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */,
 				EFED4FB525F50155003AE2E7 /* WeatherLoader.swift in Sources */,
+				EFB0F849260D3FBC00172920 /* HTTPClient.swift in Sources */,
 				EFED4FC425F56BF0003AE2E7 /* RemoteWeatherLoader.swift in Sources */,
 				EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */,
 				EFED4FA925F4FA54003AE2E7 /* DailyWeatherForecast.swift in Sources */,
