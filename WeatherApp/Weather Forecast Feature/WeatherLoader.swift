@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum WeatherLoaderResult {
+public enum WeatherLoaderResult {
     case success(WeatherForecast)
     case failure(Error)
 }
 
-protocol WeatherLoader {
+public protocol WeatherLoader {
     func load(completion: @escaping (WeatherLoaderResult) -> Void)
 }

@@ -199,7 +199,7 @@ internal final class WeatherForecastMapper {
     internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteWeatherLoader.Result {
         
         guard response.statusCode == OK_200, let weatherForecastAPI = try? JSONDecoder().decode(WeatherAPI.self, from: data) else {
-            return .failure(.invalidData)
+            return .failure(RemoteWeatherLoader.Error.invalidData)
         }
         
         let weatherForecast = weatherForecastAPI.weatherForecast
