@@ -107,10 +107,18 @@ class RemoteWeatherLoaderTests: XCTestCase {
         }
     }
     
-    private func makeSUT(url: URL = URL(string: "https://any-url.com")!) -> (client: HTTPClientSpy, sut: RemoteWeatherLoader) {
+    private func makeSUT(url: URL = URL(string: "https://any-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (client: HTTPClientSpy, sut: RemoteWeatherLoader) {
         let client = HTTPClientSpy()
         let sut = RemoteWeatherLoader(url: url, client: client)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(client, file: file, line: line)
         return (client, sut)
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should be deallocated from memory.", file: file, line: line)
+        }
     }
     
     private func expect(_ sut: RemoteWeatherLoader, toCompleteWith result: RemoteWeatherLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {

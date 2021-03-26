@@ -28,19 +28,22 @@ public final class RemoteWeatherLoader {
     }
     
     public func load(completion: @escaping (Result) -> Void) {
-        client.get(from: url) { result in
+        client.get(from: url) { [weak self] result in
             switch result {
             case let .success(data, response):
-                do {
-                    let weatherForecast = try WeatherForecastMapper.map(data, response)
-                    completion(.success(weatherForecast))
-                } catch {
-                    completion(.failure(.invalidData))
-                }
-                
+                completion((self?.map(data, response: response))!)
             case .failure:
                 completion(.failure(.connectivity))
             }
+        }
+    }
+    
+    private func map(_ data: Data, response: HTTPURLResponse) -> Result {
+        do {
+            let weatherForecast = try WeatherForecastMapper.map(data, response)
+            return .success(weatherForecast)
+        } catch {
+            return .failure(.invalidData)
         }
     }
 }
