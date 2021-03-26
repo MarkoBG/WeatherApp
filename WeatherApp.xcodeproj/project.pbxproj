@@ -71,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EFB0F922260E823200172920 /* Weather Forecast API */ = {
+			isa = PBXGroup;
+			children = (
+				EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */,
+			);
+			path = "Weather Forecast API";
+			sourceTree = "<group>";
+		};
 		EFED4F7625F2E2EC003AE2E7 = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				EFED4F9025F2E2ED003AE2E7 /* Info.plist */,
-				EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */,
+				EFB0F922260E823200172920 /* Weather Forecast API */,
 				EFED4FBD25F50346003AE2E7 /* WeatherAppTests-Bridging-Header.h */,
 			);
 			path = WeatherAppTests;
