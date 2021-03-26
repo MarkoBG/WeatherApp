@@ -196,13 +196,14 @@ internal final class WeatherForecastMapper {
         return 200
     }
     
-    internal static func map(_ data: Data, _ response: HTTPURLResponse) throws -> WeatherForecast {
-        guard response.statusCode == OK_200 else {
-            throw RemoteWeatherLoader.Error.invalidData
+    internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteWeatherLoader.Result {
+        
+        guard response.statusCode == OK_200, let weatherForecastAPI = try? JSONDecoder().decode(WeatherAPI.self, from: data) else {
+            return .failure(.invalidData)
         }
         
-        let weatherForecastAPI = try JSONDecoder().decode(WeatherAPI.self, from: data)
-        
-        return weatherForecastAPI.weatherForecast
+        let weatherForecast = weatherForecastAPI.weatherForecast
+        return .success(weatherForecast)
+
     }
 }
