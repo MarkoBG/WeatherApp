@@ -10,6 +10,7 @@
 		EFB0F849260D3FBC00172920 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F848260D3FBC00172920 /* HTTPClient.swift */; };
 		EFB0F84D260D401600172920 /* WeatherForecastMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F84C260D401600172920 /* WeatherForecastMapper.swift */; };
 		EFB0F926260F396E00172920 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F925260F396E00172920 /* URLSessionHTTPClientTests.swift */; };
+		EFB0F92B260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F92A260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFED4F8A25F2E2ED003AE2E7 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
 		EFED4F9125F2E2ED003AE2E7 /* WeatherApp.h in Headers */ = {isa = PBXBuildFile; fileRef = EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */; };
@@ -37,6 +38,7 @@
 		EFB0F848260D3FBC00172920 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFB0F84C260D401600172920 /* WeatherForecastMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastMapper.swift; sourceTree = "<group>"; };
 		EFB0F925260F396E00172920 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		EFB0F92A260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherApp.h; sourceTree = "<group>"; };
 		EFED4F8425F2E2EC003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,10 +78,19 @@
 		EFB0F922260E823200172920 /* Weather Forecast API */ = {
 			isa = PBXGroup;
 			children = (
+				EFB0F929260F5AD100172920 /* Helpers */,
 				EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */,
 				EFB0F925260F396E00172920 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Weather Forecast API";
+			sourceTree = "<group>";
+		};
+		EFB0F929260F5AD100172920 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EFB0F92A260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		EFED4F7625F2E2EC003AE2E7 = {
@@ -274,6 +285,7 @@
 			files = (
 				EFED4FBF25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift in Sources */,
 				EFB0F926260F396E00172920 /* URLSessionHTTPClientTests.swift in Sources */,
+				EFB0F92B260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
