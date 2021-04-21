@@ -10,7 +10,7 @@ import WeatherApp
 
 class WeatherAppAPIEndToEndTests: XCTestCase {
 
-    func test_endToEndTestServer_getWeatherForecastLocation() {
+    func test_endToEndTestServer_getWeatherResult() {
         
         switch getWeaterResult() {
         case let . success(weatherForecast):
