@@ -10,12 +10,12 @@ import Foundation
 internal final class WeatherForecastMapper {
     
     private struct AirQualityAPI: Decodable {
-        let co: Float
-        let o3: Float
-        let no2: Float
-        let so2: Float
-        let pm2_5: Float
-        let pm10: Float
+        let co: Double
+        let o3: Double
+        let no2: Double
+        let so2: Double
+        let pm2_5: Double
+        let pm10: Double
         let us_epa_index: Int
         let gb_defra_index: Int
         
@@ -35,27 +35,27 @@ internal final class WeatherForecastMapper {
         }
     }
     
-    private struct CurrentWeatherAPI: Decodable {
+     private struct CurrentWeatherAPI: Decodable {
         let last_updated: String
-        let temp_c: Float
-        let temp_f: Float
+        let temp_c: Double
+        let temp_f: Double
         let is_day: Int
         let condition: WeatherConditionAPI
-        let wind_mph: Float
-        let wind_kph: Float
+        let wind_mph: Double
+        let wind_kph: Double
         let wind_degree: Int
         let wind_dir: String
-        let pressure_mb: Float
-        let pressure_in: Float
-        let precip_mm: Float
-        let precip_in: Float
+        let pressure_mb: Double
+        let pressure_in: Double
+        let precip_mm: Double
+        let precip_in: Double
         let humidity: Int
         let cloud: Int
-        let feelslike_c: Float
-        let feelslike_f: Float
-        let vis_km: Float
-        let vis_miles: Float
-        let uv: Float
+        let feelslike_c: Double
+        let feelslike_f: Double
+        let vis_km: Double
+        let vis_miles: Double
+        let uv: Double
         let air_quality: AirQualityAPI
         
         var current: CurrentWeather {
@@ -88,23 +88,23 @@ internal final class WeatherForecastMapper {
     }
     
     private struct DailyWeatherAPI: Decodable {
-        let maxtemp_c: Float
-        let maxtemp_f: Float
-        let mintemp_c: Float
-        let mintemp_f: Float
-        let avgtemp_c: Float
-        let avgtemp_f: Float
-        let maxwind_mph: Float
-        let maxwind_kph: Float
-        let totalprecip_mm: Float
-        let totalprecip_in: Float
-        let avgvis_km: Float
-        let avgvis_miles: Float
-        let avghumidity: Int
+        let maxtemp_c: Double
+        let maxtemp_f: Double
+        let mintemp_c: Double
+        let mintemp_f: Double
+        let avgtemp_c: Double
+        let avgtemp_f: Double
+        let maxwind_mph: Double
+        let maxwind_kph: Double
+        let totalprecip_mm: Double
+        let totalprecip_in: Double
+        let avgvis_km: Double
+        let avgvis_miles: Double
+        let avghumidity: Double
         let daily_chance_of_rain: String
         let daily_chance_of_snow: String
         let condition: WeatherConditionAPI
-        let uv: Float
+        let uv: Double
         
         var dailyWeather: DailyWeather {
             return DailyWeather(maxTempCelsius: maxtemp_c, maxTempFahrenheit: maxtemp_f, minTempCelsius: mintemp_c, minTempFahrenheit: mintemp_f, avgTempCelsius: avgtemp_c, avgTempFahrenheit: avgtemp_f, maxWindMph: maxwind_mph, maxWingKph: maxwind_mph, totalprecipitationMM: totalprecip_mm, totalprecipitationIN: totalprecip_in, averageVisibilityKM: avgvis_km, averageVisibilityMiles: avgvis_miles, averageHumidity: avghumidity, dailyChanceOfRain: daily_chance_of_rain, dailyChanceOfSnow: daily_chance_of_snow, condition: condition.weatherCondition, uvIndex: uv)
@@ -126,31 +126,31 @@ internal final class WeatherForecastMapper {
     
     private struct WeatherByHourAPI: Decodable {
         let time: String
-        let date_epoch: Int
-        let temp_c: Float
-        let temp_f: Float
+        let time_epoch: Int
+        let temp_c: Double
+        let temp_f: Double
         let is_day: Int
         let condition: WeatherConditionAPI
-        let wind_mph: Float
-        let wind_kph: Float
+        let wind_mph: Double
+        let wind_kph: Double
         let wind_degree: Int
         let wind_dir: String
-        let pressure_mb: Float
-        let pressure_in: Float
-        let precip_mm: Float
-        let precip_in: Float
+        let pressure_mb: Double
+        let pressure_in: Double
+        let precip_mm: Double
+        let precip_in: Double
         let humidity: Int
         let cloud: Int
-        let feelslike_c: Float
-        let feelslike_f: Float
-        let vis_km: Float
-        let vis_miles: Float
-        let uv: Float
-        let chance_of_rain: Int
-        let chance_of_snow: Int
+        let feelslike_c: Double
+        let feelslike_f: Double
+        let vis_km: Double
+        let vis_miles: Double
+        let uv: Double
+        let chance_of_rain: String
+        let chance_of_snow: String
         
         var weatherByHour: WeatherByHour {
-            return WeatherByHour(time: time, timeUnixTime: date_epoch, tempCelsius: temp_c, tempFahrenheit: temp_f, isDay: is_day, condition: condition.weatherCondition, windMph: wind_mph, windKph: wind_kph, windDegree: wind_degree, windDirection: wind_dir, pressureMb: pressure_mb, pressureIn: pressure_in, precipitationMM: precip_mm, precipitationIN: precip_in, humidity: humidity, cloud: cloud, feelslikeCelsius: feelslike_c, feeelslikeFahrenheit: feelslike_f, visibilityKM: vis_km, visibilityMiles: vis_miles, uvIndex: uv, chanceOfRain: chance_of_rain, chanceOfSnow: chance_of_snow)
+            return WeatherByHour(time: time, timeUnixTime: time_epoch, tempCelsius: temp_c, tempFahrenheit: temp_f, isDay: is_day, condition: condition.weatherCondition, windMph: wind_mph, windKph: wind_kph, windDegree: wind_degree, windDirection: wind_dir, pressureMb: pressure_mb, pressureIn: pressure_in, precipitationMM: precip_mm, precipitationIN: precip_in, humidity: humidity, cloud: cloud, feelslikeCelsius: feelslike_c, feeelslikeFahrenheit: feelslike_f, visibilityKM: vis_km, visibilityMiles: vis_miles, uvIndex: uv, chanceOfRain: chance_of_rain, chanceOfSnow: chance_of_snow)
         }
     }
     
@@ -198,12 +198,10 @@ internal final class WeatherForecastMapper {
     
     internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteWeatherLoader.Result {
         
-        guard response.statusCode == OK_200, let weatherForecastAPI = try? JSONDecoder().decode(WeatherAPI.self, from: data) else {
+        guard response.statusCode == OK_200, let weatherForecast = try? JSONDecoder().decode(WeatherAPI.self, from: data) else {
             return .failure(RemoteWeatherLoader.Error.invalidData)
         }
         
-        let weatherForecast = weatherForecastAPI.weatherForecast
-        return .success(weatherForecast)
-
+        return .success(weatherForecast.weatherForecast)
     }
 }

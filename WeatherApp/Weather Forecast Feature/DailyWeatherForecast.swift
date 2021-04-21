@@ -24,25 +24,25 @@ public struct DailyWeatherForecast {
 }
 
 public struct DailyWeather {
-    public let maxTempCelsius: Float
-    public let maxTempFahrenheit: Float
-    public let minTempCelsius: Float
-    public let minTempFahrenheit: Float
-    public let avgTempCelsius: Float
-    public let avgTempFahrenheit: Float
-    public let maxWindMph: Float
-    public let maxWingKph: Float
-    public let totalprecipitationMM: Float
-    public let totalprecipitationIN: Float
-    public let averageVisibilityKM: Float
-    public let averageVisibilityMiles: Float
-    public let averageHumidity: Int
+    public let maxTempCelsius: Double
+    public let maxTempFahrenheit: Double
+    public let minTempCelsius: Double
+    public let minTempFahrenheit: Double
+    public let avgTempCelsius: Double
+    public let avgTempFahrenheit: Double
+    public let maxWindMph: Double
+    public let maxWingKph: Double
+    public let totalprecipitationMM: Double
+    public let totalprecipitationIN: Double
+    public let averageVisibilityKM: Double
+    public let averageVisibilityMiles: Double
+    public let averageHumidity: Double
     public let dailyChanceOfRain: String
     public let dailyChanceOfSnow: String
     public let condition: WeatherCondition
-    public let uvIndex: Float
+    public let uvIndex: Double
     
-    public init(maxTempCelsius: Float, maxTempFahrenheit: Float, minTempCelsius: Float, minTempFahrenheit: Float, avgTempCelsius: Float, avgTempFahrenheit: Float, maxWindMph: Float, maxWingKph: Float, totalprecipitationMM: Float, totalprecipitationIN: Float, averageVisibilityKM: Float, averageVisibilityMiles: Float, averageHumidity: Int, dailyChanceOfRain: String, dailyChanceOfSnow: String, condition: WeatherCondition, uvIndex: Float) {
+    public init(maxTempCelsius: Double, maxTempFahrenheit: Double, minTempCelsius: Double, minTempFahrenheit: Double, avgTempCelsius: Double, avgTempFahrenheit: Double, maxWindMph: Double, maxWingKph: Double, totalprecipitationMM: Double, totalprecipitationIN: Double, averageVisibilityKM: Double, averageVisibilityMiles: Double, averageHumidity: Double, dailyChanceOfRain: String, dailyChanceOfSnow: String, condition: WeatherCondition, uvIndex: Double) {
         self.maxTempCelsius = maxTempCelsius
         self.maxTempFahrenheit = maxTempFahrenheit
         self.minTempCelsius = minTempCelsius
@@ -84,29 +84,29 @@ public struct Astrology {
 public struct WeatherByHour {
     public let time: String
     public let timeUnixTime: Int
-    public let tempCelsius: Float
-    public let tempFahrenheit: Float
+    public let tempCelsius: Double
+    public let tempFahrenheit: Double
     public let isDay: Int
     public let condition: WeatherCondition
-    public let windMph: Float
-    public let windKph: Float
+    public let windMph: Double
+    public let windKph: Double
     public let windDegree: Int
     public let windDirection: String
-    public let pressureMb: Float
-    public let pressureIn: Float
-    public let precipitationMM: Float
-    public let precipitationIN: Float
+    public let pressureMb: Double
+    public let pressureIn: Double
+    public let precipitationMM: Double
+    public let precipitationIN: Double
     public let humidity: Int
     public let cloud: Int
-    public let feelslikeCelsius: Float
-    public let feeelslikeFahrenheit: Float
-    public let visibilityKM: Float
-    public let visibilityMiles: Float
-    public let uvIndex: Float
-    public let chanceOfRain: Int
-    public let chanceOfSnow: Int
+    public let feelslikeCelsius: Double
+    public let feeelslikeFahrenheit: Double
+    public let visibilityKM: Double
+    public let visibilityMiles: Double
+    public let uvIndex: Double
+    public let chanceOfRain: String
+    public let chanceOfSnow: String
     
-    public init(time: String, timeUnixTime: Int, tempCelsius: Float, tempFahrenheit: Float, isDay: Int, condition: WeatherCondition, windMph: Float, windKph: Float, windDegree: Int, windDirection: String, pressureMb: Float, pressureIn: Float, precipitationMM: Float, precipitationIN: Float, humidity: Int, cloud: Int, feelslikeCelsius: Float, feeelslikeFahrenheit: Float, visibilityKM: Float, visibilityMiles: Float, uvIndex: Float, chanceOfRain: Int, chanceOfSnow: Int) {
+    public init(time: String, timeUnixTime: Int, tempCelsius: Double, tempFahrenheit: Double, isDay: Int, condition: WeatherCondition, windMph: Double, windKph: Double, windDegree: Int, windDirection: String, pressureMb: Double, pressureIn: Double, precipitationMM: Double, precipitationIN: Double, humidity: Int, cloud: Int, feelslikeCelsius: Double, feeelslikeFahrenheit: Double, visibilityKM: Double, visibilityMiles: Double, uvIndex: Double, chanceOfRain: String, chanceOfSnow: String) {
         self.time = time
         self.timeUnixTime = timeUnixTime
         self.tempCelsius = tempCelsius

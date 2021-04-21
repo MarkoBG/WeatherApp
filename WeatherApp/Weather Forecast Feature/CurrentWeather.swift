@@ -9,28 +9,28 @@ import Foundation
 
 public struct CurrentWeather {
     public let lastUpdated: String
-    public let tempCelsius: Float
-    public let tempFahrenheit: Float
+    public let tempCelsius: Double
+    public let tempFahrenheit: Double
     public let isDay: Int  // 1 - yes, 0 - no
     public let condition: WeatherCondition
-    public let windMph: Float
-    public let windKph: Float
+    public let windMph: Double
+    public let windKph: Double
     public let windDegree: Int
     public let windDirection: String
-    public let pressureMb: Float
-    public let pressureIn: Float
-    public let precipitationMM: Float
-    public let precipitationIN: Float
+    public let pressureMb: Double
+    public let pressureIn: Double
+    public let precipitationMM: Double
+    public let precipitationIN: Double
     public let humidity: Int
     public let cloud: Int
-    public let feelslikeCelsius: Float
-    public let feelslikeFahrenheit: Float
-    public let visibilityKM: Float
-    public let visibilityMiles: Float
-    public let uvIndex: Float
+    public let feelslikeCelsius: Double
+    public let feelslikeFahrenheit: Double
+    public let visibilityKM: Double
+    public let visibilityMiles: Double
+    public let uvIndex: Double
     public let airQuality: AirQuality
     
-    public init(lastUpdated: String, tempCelsius: Float, tempFahrenheit: Float, isDay: Int, condition: WeatherCondition, windMph: Float, windKph: Float, windDegree: Int, windDirection: String, pressureMb: Float, pressureIn: Float, precipitationMM: Float, precipitationIN: Float, humidity: Int, cloud: Int, feelslikeCelsius: Float, feelslikeFahrenheit: Float, visibilityKM: Float, visibilityMiles: Float, uvIndex: Float, airQuality: AirQuality) {
+    public init(lastUpdated: String, tempCelsius: Double, tempFahrenheit: Double, isDay: Int, condition: WeatherCondition, windMph: Double, windKph: Double, windDegree: Int, windDirection: String, pressureMb: Double, pressureIn: Double, precipitationMM: Double, precipitationIN: Double, humidity: Int, cloud: Int, feelslikeCelsius: Double, feelslikeFahrenheit: Double, visibilityKM: Double, visibilityMiles: Double, uvIndex: Double, airQuality: AirQuality) {
         self.lastUpdated = lastUpdated
         self.tempCelsius = tempCelsius
         self.tempFahrenheit = tempFahrenheit

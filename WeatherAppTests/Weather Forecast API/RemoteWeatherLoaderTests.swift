@@ -168,7 +168,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         return (location, json)
     }
     
-    private func createCurrentWeather(lastUpdated: String = "2021-03-14 16:45", tempCelsius: Float = 14, tempFahrenheit: Float = 57.2, isDay: Int = 1, condition: WeatherCondition, windMph: Float = 4.3, windKph: Float = 6.8, windDegree: Int = 20, windDirection: String = "NNE", pressureMb: Float = 1004, pressureIn: Float = 30.1, precipitationMM: Float = 0, precipitationIN: Float = 0, humidity: Int = 63, cloud: Int = 50, feelslikeCelsius: Float = 13.4, feelslikeFahrenheit: Float = 56.1, visibilityKM: Float = 10, visibilityMiles: Float = 6, uvIndex: Float = 5, airQuality: AirQuality) -> (model: CurrentWeather, json: [String: Any]) {
+    private func createCurrentWeather(lastUpdated: String = "2021-03-14 16:45", tempCelsius: Double = 14, tempFahrenheit: Double = 57.2, isDay: Int = 1, condition: WeatherCondition, windMph: Double = 4.3, windKph: Double = 6.8, windDegree: Int = 20, windDirection: String = "NNE", pressureMb: Double = 1004, pressureIn: Double = 30.1, precipitationMM: Double = 0, precipitationIN: Double = 0, humidity: Int = 63, cloud: Int = 50, feelslikeCelsius: Double = 13.4, feelslikeFahrenheit: Double = 56.1, visibilityKM: Double = 10, visibilityMiles: Double = 6, uvIndex: Double = 5, airQuality: AirQuality) -> (model: CurrentWeather, json: [String: Any]) {
         
         let currentWeather = CurrentWeather(lastUpdated: lastUpdated, tempCelsius: tempCelsius, tempFahrenheit: tempFahrenheit, isDay: isDay, condition: condition, windMph:windMph, windKph: windKph, windDegree: windDegree, windDirection: windDirection, pressureMb: pressureMb, pressureIn: pressureIn, precipitationMM: precipitationMM, precipitationIN: precipitationIN, humidity: humidity, cloud: cloud, feelslikeCelsius: feelslikeCelsius, feelslikeFahrenheit: feelslikeFahrenheit, visibilityKM: visibilityKM, visibilityMiles: visibilityMiles, uvIndex: uvIndex, airQuality: airQuality)
         
@@ -212,7 +212,7 @@ class RemoteWeatherLoaderTests: XCTestCase {
         return (weatherCondition, json)
     }
     
-    private func createAirQuality(carbonMonoxide: Float = 220.3000030517578, ozon: Float = 91.5999984741211, nitrogenDioxide: Float = 1.7000000476837158, sulphurDioxide: Float = 3.5, pm2_5: Float = 2.200000047683716, pm10: Float = 3.200000047683716, usEpaIndex: Int = 1, gbDefraIndex: Int = 1) -> (model: AirQuality, json: [String: Any]) {
+    private func createAirQuality(carbonMonoxide: Double = 220.3000030517578, ozon: Double = 91.5999984741211, nitrogenDioxide: Double = 1.7000000476837158, sulphurDioxide: Double = 3.5, pm2_5: Double = 2.200000047683716, pm10: Double = 3.200000047683716, usEpaIndex: Int = 1, gbDefraIndex: Int = 1) -> (model: AirQuality, json: [String: Any]) {
         
         let airQuality = AirQuality(carbonMonoxide: carbonMonoxide, ozon: ozon, nitrogenDioxide: nitrogenDioxide, sulphurDioxide: sulphurDioxide, pm2_5: pm2_5, pm10: pm10, usEpaIndex: usEpaIndex, gbDefraIndex: gbDefraIndex)
         
