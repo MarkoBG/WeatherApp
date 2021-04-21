@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF3CFE252630B7D600D65071 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F92A260F5AF800172920 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFB0F849260D3FBC00172920 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F848260D3FBC00172920 /* HTTPClient.swift */; };
 		EFB0F84D260D401600172920 /* WeatherForecastMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F84C260D401600172920 /* WeatherForecastMapper.swift */; };
 		EFB0F926260F396E00172920 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F925260F396E00172920 /* URLSessionHTTPClientTests.swift */; };
@@ -330,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFB0F9432613B0B200172920 /* WeatherAppAPIEndToEndTests.swift in Sources */,
+				EF3CFE252630B7D600D65071 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
