@@ -12,7 +12,7 @@ class WeatherAppAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServer_getWeatherResult() {
         
-        switch getWeaterResult() {
+        switch getWeatherResult() {
         case let . success(weatherForecast):
             let location = weatherForecast.location
             XCTAssertEqual(location.name, "Belgrade")
@@ -25,7 +25,7 @@ class WeatherAppAPIEndToEndTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    func getWeaterResult(file: StaticString = #filePath, line: UInt = #line) -> WeatherLoaderResult? {
+    func getWeatherResult(file: StaticString = #filePath, line: UInt = #line) -> WeatherLoaderResult? {
         let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=89aefa75d6a545ce865222351210103&q=Belgrade&days=1&aqi=yes&alerts=no")!
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteWeatherLoader(url: url, client: client)
