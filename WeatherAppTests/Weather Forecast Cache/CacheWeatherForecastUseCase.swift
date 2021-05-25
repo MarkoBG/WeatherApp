@@ -42,15 +42,16 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         
         sut.save(weatherForecast.model)
-        
         XCTAssertEqual(store.deleteCachedWeatherForecastCallCount, 1)
     }
     
     // MARK: - Helpers
     
-    private func makeSUT() -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
         let store = WeatherForecastStore()
         let sut = LocalWeatherLoader(store: store)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(store, file: file, line: line)
         return (sut, store)
     }
     
