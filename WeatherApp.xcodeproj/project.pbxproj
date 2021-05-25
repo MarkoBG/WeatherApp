@@ -103,7 +103,6 @@
 		EFB0F922260E823200172920 /* Weather Forecast API */ = {
 			isa = PBXGroup;
 			children = (
-				EFB0F929260F5AD100172920 /* Helpers */,
 				EFED4FBE25F50346003AE2E7 /* RemoteWeatherLoaderTests.swift */,
 				EFB0F925260F396E00172920 /* URLSessionHTTPClientTests.swift */,
 			);
@@ -170,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				EFED4F9025F2E2ED003AE2E7 /* Info.plist */,
+				EFB0F929260F5AD100172920 /* Helpers */,
 				EFBC8C22265D94F700A29D23 /* Weather Forecast Cache */,
 				EFB0F922260E823200172920 /* Weather Forecast API */,
 				EFED4FBD25F50346003AE2E7 /* WeatherAppTests-Bridging-Header.h */,
