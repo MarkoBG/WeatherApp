@@ -22,9 +22,14 @@ class LocalWeatherLoader {
 
 class WeatherForecastStore {
     var deleteCachedWeatherForecastCallCount = 0
+    var insertCallCount = 0
     
     func deleteCachedWeatherForecast() {
         deleteCachedWeatherForecastCallCount += 1
+    }
+    
+    func completeDeletion(with error: Error, at index: Int = 0) {
+        
     }
 }
 
@@ -45,6 +50,18 @@ class CacheWeatherForecastUseCase: XCTestCase {
         XCTAssertEqual(store.deleteCachedWeatherForecastCallCount, 1)
     }
     
+    func test_save_doesNotRequestCacheInsertionOnDeletionError() {
+        let (sut, store) = makeSUT()
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        let deletionError = anyNSError()
+        
+        sut.save(weatherForecast.model)
+        store.completeDeletion(with: deletionError)
+        
+        XCTAssertEqual(store.insertCallCount, 0)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
@@ -53,6 +70,10 @@ class CacheWeatherForecastUseCase: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(store, file: file, line: line)
         return (sut, store)
+    }
+    
+    private func anyNSError() -> NSError {
+        return NSError(domain: "Error", code: 1)
     }
     
     private func createWeatherLocation(name: String = "Belgrade", region: String = "Central Serbia", country: String = "Serbia", latitude: Double = 44.8, longitude: Double = 20.47, timeZoneId: String = "Europe/Belgrade", localTime: String = "2021-03-14 16:52") -> (model: Location, json: [String: Any]) {
