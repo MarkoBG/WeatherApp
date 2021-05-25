@@ -16,20 +16,37 @@ class LocalWeatherLoader {
     }
     
     func save(_ forecast: WeatherForecast) {
-        store.deleteCachedWeatherForecast()
+        store.deleteCachedWeatherForecast { [unowned self] error in
+            if error == nil {
+                self.store.insert(forecast)
+            }
+        }
     }
 }
 
 class WeatherForecastStore {
+    typealias DeletionCompletion = (Error?) -> Void
+    
     var deleteCachedWeatherForecastCallCount = 0
     var insertCallCount = 0
     
-    func deleteCachedWeatherForecast() {
+    private var deletionCompletions = [DeletionCompletion]()
+    
+    func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion) {
         deleteCachedWeatherForecastCallCount += 1
+        deletionCompletions.append(completion)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
-        
+        deletionCompletions[index](error)
+    }
+    
+    func completeDeletionSuccessfully(at index: Int = 0) {
+        deletionCompletions[index](nil)
+    }
+    
+    func insert(_ forecast: WeatherForecast) {
+        insertCallCount += 1
     }
 }
 
@@ -60,6 +77,17 @@ class CacheWeatherForecastUseCase: XCTestCase {
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.insertCallCount, 0)
+    }
+    
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
+        let (sut, store) = makeSUT()
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        
+        sut.save(weatherForecast.model)
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertCallCount, 1)
     }
     
     // MARK: - Helpers
