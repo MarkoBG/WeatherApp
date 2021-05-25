@@ -31,15 +31,13 @@ class WeatherForecastStore {
 class CacheWeatherForecastUseCase: XCTestCase {
 
     func test_init_doesNotDeleteCacheUponCreation() {
-        let store = WeatherForecastStore()
-        _ = LocalWeatherLoader(store: store)
+        let (_, store) = makeSUT()
         
         XCTAssertEqual(store.deleteCachedWeatherForecastCallCount, 0)
     }
     
     func test_save_requestsCacheDeletion() {
-        let store = WeatherForecastStore()
-        let sut = LocalWeatherLoader(store: store)
+        let (sut, store) = makeSUT()
         
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         
@@ -49,6 +47,13 @@ class CacheWeatherForecastUseCase: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT() -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
+        let store = WeatherForecastStore()
+        let sut = LocalWeatherLoader(store: store)
+        return (sut, store)
+    }
+    
     private func createWeatherLocation(name: String = "Belgrade", region: String = "Central Serbia", country: String = "Serbia", latitude: Double = 44.8, longitude: Double = 20.47, timeZoneId: String = "Europe/Belgrade", localTime: String = "2021-03-14 16:52") -> (model: Location, json: [String: Any]) {
         
         let location = Location(name: name, region: region, country: country, latitude: latitude, longitude: longitude, timeZoneId: timeZoneId, localTime: localTime)
