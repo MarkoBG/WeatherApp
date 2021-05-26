@@ -61,6 +61,10 @@ class WeatherForecastStore {
         deletionCompletions[index](nil)
     }
     
+    func completeInsertionSuccessfully(at index: Int = 0) {
+        insertionCompletions[index](nil)
+    }
+    
     func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
         insertionCompletions.append(completion)
         receivedMessages.append(.insert(forecast, timestamp))
@@ -145,6 +149,25 @@ class CacheWeatherForecastUseCase: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, insertionError)
+    }
+    
+    func test_save_succeedsOnSuccessfulCacheInsertion() {
+        let (sut, store) = makeSUT()
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        let exp = expectation(description: "Wait for save completion")
+        
+        var receivedError: Error?
+        sut.save(weatherForecast.model) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletionSuccessfully()
+        store.completeInsertionSuccessfully()
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertNil(receivedError)
     }
     
     // MARK: - Helpers
