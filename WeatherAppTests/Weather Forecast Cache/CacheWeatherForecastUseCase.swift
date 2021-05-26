@@ -9,16 +9,18 @@ import XCTest
 import WeatherApp
 
 class LocalWeatherLoader {
-    let store: WeatherForecastStore
+    private let store: WeatherForecastStore
+    private let currentDate: () -> Date
     
-    init(store: WeatherForecastStore) {
+    init(store: WeatherForecastStore, currentDate: @escaping () -> Date) {
         self.store = store
+        self.currentDate = currentDate
     }
     
     func save(_ forecast: WeatherForecast) {
         store.deleteCachedWeatherForecast { [unowned self] error in
             if error == nil {
-                self.store.insert(forecast)
+                self.store.insert(forecast, timestamp: self.currentDate())
             }
         }
     }
@@ -29,6 +31,8 @@ class WeatherForecastStore {
     
     var deleteCachedWeatherForecastCallCount = 0
     var insertCallCount = 0
+    
+    var insertions = [(weatherForecast: WeatherForecast, timestamp: Date)]()
     
     private var deletionCompletions = [DeletionCompletion]()
     
@@ -45,8 +49,9 @@ class WeatherForecastStore {
         deletionCompletions[index](nil)
     }
     
-    func insert(_ forecast: WeatherForecast) {
+    func insert(_ forecast: WeatherForecast, timestamp: Date) {
         insertCallCount += 1
+        insertions.append((forecast, timestamp))
     }
 }
 
@@ -90,11 +95,25 @@ class CacheWeatherForecastUseCase: XCTestCase {
         XCTAssertEqual(store.insertCallCount, 1)
     }
     
+    func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
+        let timestamp = Date()
+        let (sut, store) = makeSUT(currentDate: { timestamp })
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        
+        sut.save(weatherForecast.model)
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertions.count, 1)
+        XCTAssertEqual(store.insertions.first?.weatherForecast, weatherForecast.model)
+        XCTAssertEqual(store.insertions.first?.timestamp, timestamp)
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
         let store = WeatherForecastStore()
-        let sut = LocalWeatherLoader(store: store)
+        let sut = LocalWeatherLoader(store: store, currentDate: currentDate)
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(store, file: file, line: line)
         return (sut, store)
