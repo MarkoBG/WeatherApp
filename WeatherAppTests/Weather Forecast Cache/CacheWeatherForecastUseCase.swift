@@ -28,47 +28,11 @@ class LocalWeatherLoader {
     }
 }
 
-class WeatherForecastStore {
-    
+protocol WeatherForecastStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-    
-    enum ReceiveMessage: Equatable {
-        case deleteCachedWeatherForecast
-        case insert(WeatherForecast, Date)
-    }
-    
-    private(set) var receivedMessages = [ReceiveMessage]()
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    
-    
-    func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion) {
-        deletionCompletions.append(completion)
-        receivedMessages.append(.deleteCachedWeatherForecast)
-    }
-    
-    func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
-    }
-    
-    func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
-    }
-    
-    
-    func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
-    }
-    
-    func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
-    }
-    
-    func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
-        insertionCompletions.append(completion)
-        receivedMessages.append(.insert(forecast, timestamp))
-    }
+    func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion)
+    func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion)
 }
 
 class CacheWeatherForecastUseCase: XCTestCase {
@@ -139,8 +103,8 @@ class CacheWeatherForecastUseCase: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStore) {
-        let store = WeatherForecastStore()
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalWeatherLoader, store: WeatherForecastStoreSpy) {
+        let store = WeatherForecastStoreSpy()
         let sut = LocalWeatherLoader(store: store, currentDate: currentDate)
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(store, file: file, line: line)
@@ -162,6 +126,45 @@ class CacheWeatherForecastUseCase: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+    }
+    
+    private class WeatherForecastStoreSpy: WeatherForecastStore {
+        enum ReceiveMessage: Equatable {
+            case deleteCachedWeatherForecast
+            case insert(WeatherForecast, Date)
+        }
+        
+        private(set) var receivedMessages = [ReceiveMessage]()
+        private var deletionCompletions = [DeletionCompletion]()
+        private var insertionCompletions = [InsertionCompletion]()
+        
+        
+        func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion) {
+            deletionCompletions.append(completion)
+            receivedMessages.append(.deleteCachedWeatherForecast)
+        }
+        
+        func completeDeletion(with error: Error, at index: Int = 0) {
+            deletionCompletions[index](error)
+        }
+        
+        func completeInsertion(with error: Error, at index: Int = 0) {
+            insertionCompletions[index](error)
+        }
+        
+        
+        func completeDeletionSuccessfully(at index: Int = 0) {
+            deletionCompletions[index](nil)
+        }
+        
+        func completeInsertionSuccessfully(at index: Int = 0) {
+            insertionCompletions[index](nil)
+        }
+        
+        func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
+            insertionCompletions.append(completion)
+            receivedMessages.append(.insert(forecast, timestamp))
+        }
     }
     
     private func anyNSError() -> NSError {
