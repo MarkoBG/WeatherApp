@@ -17,8 +17,9 @@ class LocalWeatherLoader {
         self.currentDate = currentDate
     }
     
-    func save(_ forecast: WeatherForecast) {
+    func save(_ forecast: WeatherForecast, completion: @escaping (Error?) -> Void) {
         store.deleteCachedWeatherForecast { [unowned self] error in
+            completion(error)
             if error == nil {
                 self.store.insert(forecast, timestamp: self.currentDate())
             }
@@ -69,7 +70,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
         
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         
-        sut.save(weatherForecast.model)
+        sut.save(weatherForecast.model) { _ in }
         XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast])
     }
     
@@ -79,7 +80,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         let deletionError = anyNSError()
         
-        sut.save(weatherForecast.model)
+        sut.save(weatherForecast.model) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast])
@@ -91,10 +92,29 @@ class CacheWeatherForecastUseCase: XCTestCase {
         
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         
-        sut.save(weatherForecast.model)
+        sut.save(weatherForecast.model) { _ in }
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast, .insert(weatherForecast.model, timestamp)])
+    }
+    
+    func test_save_failsOnDeletionError() {
+        let (sut, store) = makeSUT()
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        let deletionError = anyNSError()
+        let exp = expectation(description: "Wait for save completion")
+        
+        var receivedError: Error?
+        sut.save(weatherForecast.model) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletion(with: deletionError)
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedError as NSError?, deletionError)
     }
     
     // MARK: - Helpers
