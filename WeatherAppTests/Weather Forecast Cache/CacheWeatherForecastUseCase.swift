@@ -19,9 +19,10 @@ class LocalWeatherLoader {
     
     func save(_ forecast: WeatherForecast, completion: @escaping (Error?) -> Void) {
         store.deleteCachedWeatherForecast { [unowned self] error in
-            completion(error)
             if error == nil {
-                self.store.insert(forecast, timestamp: self.currentDate())
+                self.store.insert(forecast, timestamp: self.currentDate(), completion: completion)
+            } else {
+                completion(error)
             }
         }
     }
@@ -30,6 +31,7 @@ class LocalWeatherLoader {
 class WeatherForecastStore {
     
     typealias DeletionCompletion = (Error?) -> Void
+    typealias InsertionCompletion = (Error?) -> Void
     
     enum ReceiveMessage: Equatable {
         case deleteCachedWeatherForecast
@@ -38,6 +40,8 @@ class WeatherForecastStore {
     
     private(set) var receivedMessages = [ReceiveMessage]()
     private var deletionCompletions = [DeletionCompletion]()
+    private var insertionCompletions = [InsertionCompletion]()
+    
     
     func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
@@ -48,11 +52,17 @@ class WeatherForecastStore {
         deletionCompletions[index](error)
     }
     
+    func completeInsertion(with error: Error, at index: Int = 0) {
+        insertionCompletions[index](error)
+    }
+    
+    
     func completeDeletionSuccessfully(at index: Int = 0) {
         deletionCompletions[index](nil)
     }
     
-    func insert(_ forecast: WeatherForecast, timestamp: Date) {
+    func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
+        insertionCompletions.append(completion)
         receivedMessages.append(.insert(forecast, timestamp))
     }
 }
@@ -115,6 +125,26 @@ class CacheWeatherForecastUseCase: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, deletionError)
+    }
+    
+    func test_save_failsOnInsertionError() {
+        let (sut, store) = makeSUT()
+        
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        let insertionError = anyNSError()
+        let exp = expectation(description: "Wait for save completion")
+        
+        var receivedError: Error?
+        sut.save(weatherForecast.model) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletionSuccessfully()
+        store.completeInsertion(with: insertionError)
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedError as NSError?, insertionError)
     }
     
     // MARK: - Helpers
