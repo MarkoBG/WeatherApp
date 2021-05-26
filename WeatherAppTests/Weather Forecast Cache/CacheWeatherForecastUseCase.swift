@@ -27,16 +27,20 @@ class LocalWeatherLoader {
 }
 
 class WeatherForecastStore {
+    
     typealias DeletionCompletion = (Error?) -> Void
     
-    var deleteCachedWeatherForecastCallCount = 0
-    var insertions = [(weatherForecast: WeatherForecast, timestamp: Date)]()
+    enum ReceiveMessage: Equatable {
+        case deleteCachedWeatherForecast
+        case insert(WeatherForecast, Date)
+    }
     
+    private(set) var receivedMessages = [ReceiveMessage]()
     private var deletionCompletions = [DeletionCompletion]()
     
     func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion) {
-        deleteCachedWeatherForecastCallCount += 1
         deletionCompletions.append(completion)
+        receivedMessages.append(.deleteCachedWeatherForecast)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
@@ -48,16 +52,16 @@ class WeatherForecastStore {
     }
     
     func insert(_ forecast: WeatherForecast, timestamp: Date) {
-        insertions.append((forecast, timestamp))
+        receivedMessages.append(.insert(forecast, timestamp))
     }
 }
 
 class CacheWeatherForecastUseCase: XCTestCase {
 
-    func test_init_doesNotDeleteCacheUponCreation() {
+    func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         
-        XCTAssertEqual(store.deleteCachedWeatherForecastCallCount, 0)
+        XCTAssertEqual(store.receivedMessages, [])
     }
     
     func test_save_requestsCacheDeletion() {
@@ -66,7 +70,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
         
         sut.save(weatherForecast.model)
-        XCTAssertEqual(store.deleteCachedWeatherForecastCallCount, 1)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
@@ -78,7 +82,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
         sut.save(weatherForecast.model)
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.insertions.count, 0)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast])
     }
     
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
@@ -90,9 +94,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
         sut.save(weatherForecast.model)
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.insertions.count, 1)
-        XCTAssertEqual(store.insertions.first?.weatherForecast, weatherForecast.model)
-        XCTAssertEqual(store.insertions.first?.timestamp, timestamp)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast, .insert(weatherForecast.model, timestamp)])
     }
     
     // MARK: - Helpers
