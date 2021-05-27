@@ -36,9 +36,4 @@ public final class LocalWeatherLoader {
     }
 }
 
-public protocol WeatherForecastStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    func deleteCachedWeatherForecast(completion: @escaping DeletionCompletion)
-    func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion)
-}
+
