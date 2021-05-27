@@ -18,7 +18,9 @@ class LocalWeatherLoader {
     }
     
     func save(_ forecast: WeatherForecast, completion: @escaping (Error?) -> Void) {
-        store.deleteCachedWeatherForecast { [unowned self] error in
+        store.deleteCachedWeatherForecast { [weak self] error in
+            guard let self = self else { return }
+            
             if error == nil {
                 self.store.insert(forecast, timestamp: self.currentDate(), completion: completion)
             } else {
@@ -99,6 +101,20 @@ class CacheWeatherForecastUseCase: XCTestCase {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         }
+    }
+    
+    func test_save_doesNotDeliveryDelitionErrorAfterSUTHasBeenDeallocated() {
+        let store = WeatherForecastStoreSpy()
+        var sut: LocalWeatherLoader? = LocalWeatherLoader(store: store, currentDate: Date.init)
+        let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
+        var receivedResuts = [Error?]()
+        
+        sut?.save(weatherForecast.model) { receivedResuts.append($0) }
+        
+        sut = nil
+        store.completeDeletion(with: anyNSError())
+        
+        XCTAssertTrue(receivedResuts.isEmpty)
     }
     
     // MARK: - Helpers
