@@ -16,6 +16,7 @@
 		EFB0F9432613B0B200172920 /* WeatherAppAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0F9422613B0B200172920 /* WeatherAppAPIEndToEndTests.swift */; };
 		EFB0F9452613B0B200172920 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
 		EFBC8C24265D955100A29D23 /* CacheWeatherForecastUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC8C23265D955100A29D23 /* CacheWeatherForecastUseCase.swift */; };
+		EFBC8C4E266042B400A29D23 /* LocalWeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC8C4D266042B400A29D23 /* LocalWeatherLoader.swift */; };
 		EFED4F8A25F2E2ED003AE2E7 /* WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */; };
 		EFED4F9125F2E2ED003AE2E7 /* WeatherApp.h in Headers */ = {isa = PBXBuildFile; fileRef = EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EFED4F9D25F4F3AB003AE2E7 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFED4F9C25F4F3AB003AE2E7 /* CurrentWeather.swift */; };
@@ -56,6 +57,7 @@
 		EFB0F9422613B0B200172920 /* WeatherAppAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		EFB0F9442613B0B200172920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFBC8C23265D955100A29D23 /* CacheWeatherForecastUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheWeatherForecastUseCase.swift; sourceTree = "<group>"; };
+		EFBC8C4D266042B400A29D23 /* LocalWeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeatherLoader.swift; sourceTree = "<group>"; };
 		EFED4F8025F2E2EC003AE2E7 /* WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherApp.h; sourceTree = "<group>"; };
 		EFED4F8425F2E2EC003AE2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +136,14 @@
 			path = "Weather Forecast Cache";
 			sourceTree = "<group>";
 		};
+		EFBC8C4C2660429200A29D23 /* WeatherForecast Cache */ = {
+			isa = PBXGroup;
+			children = (
+				EFBC8C4D266042B400A29D23 /* LocalWeatherLoader.swift */,
+			);
+			path = "WeatherForecast Cache";
+			sourceTree = "<group>";
+		};
 		EFED4F7625F2E2EC003AE2E7 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 		EFED4F8225F2E2EC003AE2E7 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				EFBC8C4C2660429200A29D23 /* WeatherForecast Cache */,
 				EFED4FC225F56BCE003AE2E7 /* Weather Forecast API */,
 				EFED4F8325F2E2EC003AE2E7 /* WeatherApp.h */,
 				EFED4F8425F2E2EC003AE2E7 /* Info.plist */,
@@ -359,6 +370,7 @@
 				EFB0F9312613AAEA00172920 /* URLSessionHTTPClient.swift in Sources */,
 				EFB0F849260D3FBC00172920 /* HTTPClient.swift in Sources */,
 				EFED4FC425F56BF0003AE2E7 /* RemoteWeatherLoader.swift in Sources */,
+				EFBC8C4E266042B400A29D23 /* LocalWeatherLoader.swift in Sources */,
 				EFED4FB125F4FFE9003AE2E7 /* Location.swift in Sources */,
 				EFED4FA925F4FA54003AE2E7 /* DailyWeatherForecast.swift in Sources */,
 			);
