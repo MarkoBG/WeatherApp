@@ -80,7 +80,8 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let store = WeatherForecastStoreSpy()
         var sut: LocalWeatherLoader? = LocalWeatherLoader(store: store, currentDate: Date.init)
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
-        var receivedResuts = [Error?]()
+        
+        var receivedResuts = [LocalWeatherLoader.SaveResult]()
         
         sut?.save(weatherForecast.model) { receivedResuts.append($0) }
         
@@ -94,7 +95,8 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let store = WeatherForecastStoreSpy()
         var sut: LocalWeatherLoader? = LocalWeatherLoader(store: store, currentDate: Date.init)
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
-        var receivedResuts = [Error?]()
+        
+        var receivedResuts = [LocalWeatherLoader.SaveResult]()
         
         sut?.save(weatherForecast.model) { receivedResuts.append($0) }
         
