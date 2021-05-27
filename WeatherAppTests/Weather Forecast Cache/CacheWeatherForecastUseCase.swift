@@ -24,11 +24,15 @@ class LocalWeatherLoader {
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
             } else {
-                self.store.insert(forecast, timestamp: self.currentDate()) { [weak self] error in
-                    guard self != nil else { return }
-                    completion(error)
-                }
+                self.cache(forecast, with: completion)
             }
+        }
+    }
+    
+    private func cache(_ forecast: WeatherForecast, with completion: @escaping (Error?) -> Void) {
+        store.insert(forecast, timestamp: currentDate()) { [weak self] error in
+            guard self != nil else { return }
+            completion(error)
         }
     }
 }
