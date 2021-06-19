@@ -31,11 +31,16 @@ public final class LocalWeatherLoader {
     }
     
     private func cache(_ forecast: WeatherForecast, with completion: @escaping (SaveResult) -> Void) {
-        store.insert(forecast, timestamp: currentDate()) { [weak self] error in
+        store.insert(forecast.toLocal(), timestamp: currentDate()) { [weak self] error in
             guard self != nil else { return }
             completion(error)
         }
     }
 }
 
+private extension WeatherForecast {
+    func toLocal() -> LocalWeatherForecast {
+        return LocalWeatherForecast(location: location, currentWeather: currentWeather, forecast: forecast)
+    }
+}
 

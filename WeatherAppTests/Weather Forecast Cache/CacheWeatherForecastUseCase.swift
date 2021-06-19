@@ -41,11 +41,11 @@ class CacheWeatherForecastUseCase: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { timestamp })
         
         let weatherForecast = createWeatherForecast(location: createWeatherLocation().model, currentWeather: createCurrentWeather(condition: createWeatherCondition().model, airQuality: createAirQuality().model).model, forecast: createForecast().model)
-        
+        let localWeatherForecast = LocalWeatherForecast(location: weatherForecast.model.location, currentWeather: weatherForecast.model.currentWeather, forecast: weatherForecast.model.forecast)
         sut.save(weatherForecast.model) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast, .insert(weatherForecast.model, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedWeatherForecast, .insert(localWeatherForecast, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -137,7 +137,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
     private class WeatherForecastStoreSpy: WeatherForecastStore {
         enum ReceiveMessage: Equatable {
             case deleteCachedWeatherForecast
-            case insert(WeatherForecast, Date)
+            case insert(LocalWeatherForecast, Date)
         }
         
         private(set) var receivedMessages = [ReceiveMessage]()
@@ -167,7 +167,7 @@ class CacheWeatherForecastUseCase: XCTestCase {
             insertionCompletions[index](nil)
         }
         
-        func insert(_ forecast: WeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
+        func insert(_ forecast: LocalWeatherForecast, timestamp: Date, completion: @escaping InsertionCompletion) {
             insertionCompletions.append(completion)
             receivedMessages.append(.insert(forecast, timestamp))
         }
