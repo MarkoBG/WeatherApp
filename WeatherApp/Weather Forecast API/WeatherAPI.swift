@@ -83,8 +83,8 @@ internal struct DailyWeatherAPI: Decodable {
     internal let avgvis_km: Double
     internal let avgvis_miles: Double
     internal let avghumidity: Double
-    internal let daily_chance_of_rain: String
-    internal let daily_chance_of_snow: String
+    internal let daily_chance_of_rain: Int
+    internal let daily_chance_of_snow: Int
     internal let condition: WeatherConditionAPI
     internal let uv: Double
 }
@@ -120,8 +120,8 @@ internal struct WeatherByHourAPI: Decodable {
     internal let vis_km: Double
     internal let vis_miles: Double
     internal let uv: Double
-    internal let chance_of_rain: String
-    internal let chance_of_snow: String
+    internal let chance_of_rain: Int
+    internal let chance_of_snow: Int
 }
 
 internal struct DailyForecastAPI: Decodable {
